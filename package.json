@@ -1,0 +1,36 @@
+{
+  "name": "auto-map-server",
+  "version": "1.0.0",
+  "description": "auto-map-server",
+  "main": "app.js",
+  "scripts": {
+    "dev": "NODE_ENV=dev supervisor app.js",
+    "prod": "NODE_ENV=prod supervisor app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stadnikEV/auto-map-server.git"
+  },
+  "author": "stadnikEV",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stadnikEV/auto-map-server/issues"
+  },
+  "homepage": "https://github.com/stadnikEV/auto-map-server#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "connect-mongo": "^2.0.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "mongodb": "^3.0.10",
+    "mongoose": "^5.1.5",
+    "morgan": "^1.9.0",
+    "nconf": "^0.10.0",
+    "winston": "^3.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-node": "^6.0.1"
+  }
+}

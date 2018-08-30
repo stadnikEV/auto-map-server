@@ -1,0 +1,17 @@
+{
+  "port": "8080",
+  "mongoose": {
+    "uri": "mongodb://localhost/drivers"
+  },
+  "session": {
+    "secret": "secretWord",
+    "key": "connection.sid",
+    "resave": false,
+    "saveUninitialized": false,
+    "cookie": {
+      "httpOnly": true,
+      "secure": false,
+      "maxAge": null
+    }
+  }
+}
