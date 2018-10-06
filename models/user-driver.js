@@ -28,6 +28,44 @@ var schema = new Schema({
   created: {
     type: Date,
     default: Date.now
+  },
+  mapData: {
+    points: {
+      A: {
+        coord: {
+          x: Number,
+          y: Number,
+        }
+      },
+      B: {
+        coord: {
+          x: Number,
+          y: Number,
+        }
+      }
+    },
+    polyline: {
+      path: [
+        {
+          x: Number,
+          y: Number,
+        }
+      ],
+    },
+    waypoints: {
+      coord: [
+        {
+          location: {
+            x: Number,
+            y: Number,
+          },
+          stopover: Boolean,
+        }
+      ],
+      id: [
+        Number,
+      ],
+    },
   }
 });
 
@@ -48,6 +86,6 @@ schema.methods.checkPassword = function(password) {
   return this.encryptPassword(password) === this.hashedPassword;
 };
 
-const User = mongoose.model('User', schema);
+const UserDriver = mongoose.model('UserDriver', schema);
 
-module.exports = User;
+module.exports = UserDriver;

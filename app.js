@@ -21,19 +21,19 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(allowCrossDomain); // разрешает кросдоменный запрос и передачу cookie
 
-app.use(session({
-  secret: config.get('session:secret'),
-  key: config.get('session:key'),
-  resave: config.get('session:resave'),
-  saveUninitialized: config.get('session:saveUninitialized'),
-  cookie: config.get('session:cookie'),
-  store: new MongoStore({
-    mongooseConnection: mongoose.connection, // MongoStore берет настройки для подключения к базе из mongoose
-  }),
-}));
 
-
-
+app.use(
+  session({
+    secret: config.get('session:secret'),
+    key: config.get('session:key'),
+    resave: config.get('session:resave'),
+    saveUninitialized: config.get('session:saveUninitialized'),
+    cookie: config.get('session:cookie'),
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection, // MongoStore берет настройки для подключения к базе из mongoose
+    }),
+  })
+);
 
 require('./routes')(app);
 

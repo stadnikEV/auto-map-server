@@ -1,10 +1,18 @@
-const User = require('../models/user');
+const defineApp = require('../utils/define-app');
 const HttpError = require('../error');
 
 module.exports = (req, res, next) => {
+  let User = null;
+  let app = defineApp(req.url);
+
+  if (app === 'driver') {
+    User = require('../models/user-driver');
+  } else {
+    User = require('../models/user-passenger');
+  }
+
   const email = req.body.email;
   const password = req.body.password;
-  console.log(email, password);
 
   User.findOne({ email })
     .then((user) => {
@@ -27,6 +35,7 @@ module.exports = (req, res, next) => {
     })
     .then((user) => {
       req.session.userId = user._id;
+      req.session.app = app;
       user.userStatus = 'login';
       return user.save();
     })

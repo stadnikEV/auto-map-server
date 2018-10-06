@@ -1,11 +1,19 @@
-const User = require('../models/user');
+const defineApp = require('../utils/define-app');
 const HttpError = require('../error');
 
 module.exports = (req, res, next) => {
+  let User = null;
+  let app = defineApp(req.url);
+
+  if (app === 'driver') {
+    User = require('../models/user-driver');
+  } else {
+    User = require('../models/user-passenger');
+  }
+
   const email = req.body.email;
   const userName = req.body.userName;
   const password = req.body.password;
-  console.log(userName, email, password);
 
   User.findOne({ email })
     .then((email) => {
@@ -15,7 +23,6 @@ module.exports = (req, res, next) => {
           message: 'The user was not created',
         }));
       }
-      return;
     })
     .then(() => {
       const user = new User({
@@ -29,6 +36,7 @@ module.exports = (req, res, next) => {
     })
     .then((user) => {
       req.session.userId = user._id;
+      req.session.app = app;
       res.json({});
     })
     .catch((err) => {
